@@ -11,9 +11,20 @@ export const FriendsProvider = (props) => {
     .then(setFriends)
   }
 
+  const addFriends = (obj) => {
+    return fetch("http://localhost:8088/friends", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(obj)
+    })
+    .then(getFriends)
+  }
+
   return (
     <FriendsContext.Provider value={{
-      friends, getFriends
+      friends, getFriends, addFriends
     }}>
       {props.children}
     </FriendsContext.Provider>

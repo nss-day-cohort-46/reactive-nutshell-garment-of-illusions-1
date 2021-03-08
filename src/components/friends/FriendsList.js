@@ -17,7 +17,13 @@ export const FriendsList = () => {
 
   useEffect(() => {
     if (searchTerms !== ""){
-      const subset = users.filter(user => user.name.includes(searchTerms))
+      let subset = users.filter(user => user.name.includes(searchTerms) && user.id !== parseInt(sessionStorage.nutshell_user))
+      subset = subset.filter(user => {
+        if (friends.find(friend => friend.currentUserId === parseInt(sessionStorage.nutshell_user) && friend.userId === user.id) === undefined){
+          return user
+        }
+      })
+      console.log(subset)
       setFilteredUsers(subset)
     }
   }, [searchTerms, users])
