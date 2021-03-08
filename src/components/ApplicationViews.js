@@ -18,10 +18,10 @@ export const ApplicationViews = () => {
       <Route path="/messages">
         {/* Render the component for the messages */}
       </Route>
-      <Route exact path="/tasks">
-        <TaskList/>
-      </Route>
       <TaskProvider>
+        <Route exact path="/tasks">
+          <TaskList/>
+        </Route>
         <Route exact path="/tasks/create">
           <TaskForm/>
         </Route>
