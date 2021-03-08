@@ -1,9 +1,11 @@
 import { useContext, useState } from "react"
+import { useHistory } from "react-router-dom"
 import { TaskContext } from "./TaskProvider"
 
 export const TaskForm = () => {
 
     const {addTask} = useContext(TaskContext)
+    const history = useHistory()
     const [task, setTask] = useState({
         name: "",
         date: "",
@@ -18,6 +20,7 @@ export const TaskForm = () => {
     }
     const saveTask = () => {
         addTask(task)
+        .then(history.push("/tasks"))
     }
     
 

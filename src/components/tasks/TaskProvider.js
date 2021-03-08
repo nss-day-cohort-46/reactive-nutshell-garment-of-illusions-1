@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState, createContext } from "react"
 
-export const TaskContext = useContext()
+export const TaskContext = createContext()
 
 export const TaskProvider = (props) => {
     const [tasks, setTasks] = useState([])
