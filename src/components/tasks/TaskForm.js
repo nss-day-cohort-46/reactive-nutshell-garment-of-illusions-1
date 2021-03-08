@@ -35,7 +35,7 @@ export const TaskForm = () => {
           </fieldset>
           <fieldset>
               <div className="form-group">
-                  <label htmlFor="date">Assign to location: </label>
+                  <label htmlFor="date">Finish Date: </label>
                   <input type="date" id="date" onChange={handleInputChange} required className="form-control" placeholder="Task Date" value={task.date}/>
               </div>
           </fieldset>
