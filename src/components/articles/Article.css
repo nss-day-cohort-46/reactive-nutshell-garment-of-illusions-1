@@ -40,11 +40,13 @@
 }
 
 .btn--link,
-.btn--delete {
+.btn--delete,
+.btn--edit,
+.btn--dummy {
   padding: 1em;
   border-radius: 10px;
   display: block;
-  width: 40%;
+  width: 20%;
 }
 
 .btn--link {

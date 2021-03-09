@@ -4,7 +4,7 @@
 */
 
 import React, { useContext } from "react"
-import { useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 
 import "./Article.css"
 import { ArticleContext } from "./ArticleProvider"
@@ -25,6 +25,19 @@ export const Article = ({ article }) => {
         <button className="btn--link">
           <a className="article__link" href={ article.url }>Link</a>
         </button>
+
+        {
+          /*
+            Users should only be able to delete their own articles.
+          */
+          article.user.id === userId ?
+            <button className="btn--edit">
+              <Link to={`/edit/${article.id}`}>Edit</Link>
+            </button>
+          :
+          <div className="btn--dummy"></div>
+        }
+        
         {
           /*
             Users should only be able to delete their own articles.
@@ -37,9 +50,16 @@ export const Article = ({ article }) => {
               Delete
             </button>
           :
-          <div></div>
+          <div className="btn--dummy"></div>
         }
       </div>
     </article>
   )
 }
+
+
+              // onClick={(event) => {
+              //   event.preventDefault()
+              //   editArticle
+              //   deleteArticle(article.id).then(() => history.push("/")) }}>
+              // Edit
