@@ -19,6 +19,7 @@ import { UserEventsProvider } from "./events /UserEventsProvider"
 export const ApplicationViews = () => {
   return (
     <>
+      <FriendsProvider>
       <ArticleProvider>
         <Route exact path="/">
           {/* Render the component for news articles */}
@@ -33,6 +34,7 @@ export const ApplicationViews = () => {
           <ArticleForm />
         </Route>
       </ArticleProvider>
+      </FriendsProvider>
 
       <FriendsProvider>
       <UsersProvider>

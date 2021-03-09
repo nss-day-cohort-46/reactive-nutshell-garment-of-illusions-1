@@ -16,11 +16,11 @@ export const Article = ({ article }) => {
   const userId = parseInt(sessionStorage.getItem("nutshell_user"))
 
   return (
-    <article className="article">
-      <h3 className="article__title">{ article.title }</h3>
-      <p className="article__synopsis">{ article.synopsis }</p>
-      <p className="article__poster">Posted by: { article.user.name }</p>
-      <p className="article__timestamp">Posted: { article.timestamp }</p>
+    <article className="article" style={article.userId === userId ? {} : {background: `cornsilk`}}>
+      <h3 className="article__title">{article.userId === userId ? article.title : <i>{article.title}</i>}</h3>
+      <p className="article__synopsis">{article.userId === userId ? article.synopsis : <i>{article.synopsis}</i>}</p>
+      <p className="article__poster">{article.userId === userId ? `Posted by: ${article.user.name}` : <i>Posted by: {article.user.name}</i>}</p>
+      <p className="article__timestamp">{article.userId === userId ? `Posted: ${article.timestamp}` : <i>Posted: {article.timestamp}</i>}</p>
       <div className="btn--container">
         <button className="btn--link">
           <a className="article__link" href={ article.url }>Link</a>

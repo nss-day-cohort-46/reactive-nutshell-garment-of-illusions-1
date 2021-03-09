@@ -8,14 +8,26 @@ import { Article } from "./Article"
 import { ArticleContext } from "./ArticleProvider"
 import "./ArticleList.css"
 import { Link } from "react-router-dom"
+import { FriendsContext } from "../friends/FriendsProvider"
 
 
 export const ArticleList = () => {
  const { articles, getArticles } = useContext(ArticleContext)
+ const { friends, getFriends } = useContext(FriendsContext)
+
+ const userId = parseInt(sessionStorage.nutshell_user)
  
  useEffect(() => {
-  getArticles()
+  getFriends()
+  .then(getArticles)
  }, []) // useEffect
+
+ let filteredFriends = friends.filter(friend => friend.currentUserId === userId)
+ let filteredArticles = filteredFriends.map(friend => {
+   return articles.filter(article => article.userId === friend.userId)
+ })
+ filteredArticles.push(articles.filter(article => article.userId === userId))
+ filteredArticles = filteredArticles.flat()
 
  return (
    <section className="articleList">
@@ -25,7 +37,7 @@ export const ArticleList = () => {
     </button>
     <ul className="articleList__list">
     {
-      articles.map(article => <Article key={ article.id } article={ article } />) // articles map
+      filteredArticles.map(article => <Article key={ article.id } article={ article } />) // articles map
     }
     </ul>
    </section>
