@@ -63,6 +63,7 @@ export const ApplicationViews = () => {
         </Route>
       </TaskProvider>
       
+      <FriendsProvider>
       <UserEventsProvider>
       <EventsProvider>
         <Route exact path="/events">
@@ -78,6 +79,7 @@ export const ApplicationViews = () => {
         </Route>
       </EventsProvider>
       </UserEventsProvider>
+      </FriendsProvider>
     </>
   )
 }
