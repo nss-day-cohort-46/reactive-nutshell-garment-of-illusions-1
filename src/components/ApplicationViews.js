@@ -29,7 +29,7 @@ export const ApplicationViews = () => {
           {/* Render the component for news articles */}
           <ArticleForm />
         </Route>
-        <Route exact path="/articles/detail/:articleId">
+        <Route exact path="/edit/:articleId(\d+)">
           {/* Render the component for news articles */}
           <ArticleForm />
         </Route>

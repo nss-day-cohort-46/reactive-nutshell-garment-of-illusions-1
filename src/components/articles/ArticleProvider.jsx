@@ -31,6 +31,7 @@ export const ArticleProvider = ( props ) => {
  const getArticles = () => {
   return fetch("http://localhost:8088/articles?_expand=user")
    .then(res => res.json())
+   .then(data => data.sort(_byDate))
    .then(setArticles)
  } // getArticles
 
@@ -57,15 +58,34 @@ export const ArticleProvider = ( props ) => {
  } // deleteArticle
 
 
+ const updateArticle = ( article ) => {
+   return fetch(`http://localhost:8088/articles/${article.id}`, {
+     method: "PUT",
+     headers: {
+       "Content-Type": "application/json"
+     },
+     body: JSON.stringify(article)
+   })
+   .then(getArticles)
+ } // editArticle
+
+
+ const getArticleById = ( id ) => {
+   return fetch(`http://localhost:8088/articles/${id}?_expand=user`)
+    .then(res => res.json())
+ } // getArticleById
+
+
  return (
   <ArticleContext.Provider value={{
    articles,
    getArticles,
    addArticle,
-   deleteArticle
+   deleteArticle,
+   updateArticle,
+   getArticleById
   }}>
    { props.children }
   </ArticleContext.Provider>
  ) // return
 } // getArticles
-  //  .then(data => data.sort(_byDate))

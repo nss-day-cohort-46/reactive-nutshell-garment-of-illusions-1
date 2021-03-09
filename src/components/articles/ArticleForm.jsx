@@ -2,7 +2,7 @@
  @author - cheo
  @return - article form to add article.
 */
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router"
 import { ArticleContext } from "./ArticleProvider"
 import "./ArticleForm.css"
@@ -19,7 +19,7 @@ import "./ArticleForm.css"
 
 export const ArticleForm = () => {
 
- const { addArticle } = useContext(ArticleContext)
+ const { addArticle, getArticles, getArticleById, updateArticle } = useContext(ArticleContext)
  const history = useHistory()
  const { articleId } = useParams()
 
@@ -34,6 +34,17 @@ export const ArticleForm = () => {
  })
 
 
+ useEffect(() => {
+   getArticles()
+   if(articleId) {
+     getArticleById(articleId)
+      .then(article => {
+        setArticles(article)
+      })
+   }
+ }, []) // useEffect
+
+
  const handleControlledInputChange = ( event ) => {
   const newArticle = { ...article }
   const dateObj = new Date()
@@ -46,8 +57,20 @@ export const ArticleForm = () => {
 
 
  const handleSaveArticle = () => {
-  addArticle(article)
-   .then(() => history.push("/"))
+  
+   if(!articleId) {
+    addArticle(article)
+      .then(() => history.push("/"))
+   } else {
+      if (parseInt(sessionStorage.getItem("nutshell_user")) === article.userId) {
+      updateArticle(article)
+        .then(getArticles)
+        .then(() => history.push("/"))
+      } else {
+        window.alert("You cannot edit this post")
+        history.push("/")
+      }
+   }
  } // handleSaveArticle
 
 
@@ -62,7 +85,7 @@ export const ArticleForm = () => {
      name="title"
      className="form-control" 
      placeholder="Article Title"
-     value={article.tile}
+     value={article.title}
      onChange={handleControlledInputChange}
      required 
      autoFocus />
