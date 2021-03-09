@@ -31,7 +31,7 @@ export const FriendsSearch = () => {
   return (
     <>
       <h2>Search Users</h2>
-      <input type="text" placeholder="Friend's name..." onKeyUp={(event) => setSearchTerms(event.target.value)} />
+      <input type="text" placeholder="Friend's name..." autoFocus onKeyUp={(event) => setSearchTerms(event.target.value)} />
       <div className="friends">
         {
           filteredUsers.map(user => {
