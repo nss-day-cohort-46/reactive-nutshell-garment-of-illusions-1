@@ -32,9 +32,16 @@ export const TaskProvider = (props) => {
         })
         .then(getTasks)
     }
+    const removeTask = (taskId) => {
+        return fetch(`http://localhost:8088/tasks/${taskId}`, {
+            method: "DELETE"
+        })
+        .then(getTasks)
+
+    }
 
     return(
-        <TaskContext.Provider value= {{tasks, getTasks, addTask, setTasks, completeTask}}>
+        <TaskContext.Provider value= {{tasks, getTasks, addTask, setTasks, removeTask, completeTask}}>
             {props.children}
         </TaskContext.Provider>
     )
