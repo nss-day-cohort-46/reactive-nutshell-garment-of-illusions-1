@@ -3,6 +3,10 @@ import { Route } from "react-router-dom"
 import { ArticleForm } from "./articles/ArticleForm"
 import { ArticleList } from "./articles/ArticleList"
 import { ArticleProvider } from "./articles/ArticleProvider"
+import { FriendsList } from "./friends/FriendsList"
+import { FriendsProvider } from "./friends/FriendsProvider"
+import { FriendsSearch } from "./friends/FriendsSearch"
+import { UsersProvider } from "./users/UsersProvider"
 import { TaskForm } from "./tasks/TaskForm"
 import { TaskList } from  "./tasks/TaskList"
 import { TaskProvider } from "./tasks/TaskProvider"
@@ -22,12 +26,23 @@ export const ApplicationViews = () => {
         </Route>
       </ArticleProvider>
 
-      <Route path="/friends">
-        {/* Render the component for list of friends */}
-      </Route>
-      <Route path="/messages">
+      <FriendsProvider>
+      <UsersProvider>
+        <Route exact path="/friends">
+          {/* Render the component for list of friends */}
+          <FriendsList />
+        </Route>
+
+        <Route exact path="/friends/search">
+          <FriendsSearch />
+        </Route>
+      </UsersProvider>
+      </FriendsProvider>
+
+      <Route exact path="/messages">
         {/* Render the component for the messages */}
       </Route>
+
       <TaskProvider>
         <Route exact path="/tasks">
           <TaskList/>
@@ -36,6 +51,7 @@ export const ApplicationViews = () => {
           <TaskForm/>
         </Route>
       </TaskProvider>
+      
       <Route path="/events">
         {/* Render the component for the user's events */}
       </Route>
