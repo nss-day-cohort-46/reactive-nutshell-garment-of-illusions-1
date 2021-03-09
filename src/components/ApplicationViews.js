@@ -10,6 +10,9 @@ import { UsersProvider } from "./users/UsersProvider"
 import { TaskForm } from "./tasks/TaskForm"
 import { TaskList } from  "./tasks/TaskList"
 import { TaskProvider } from "./tasks/TaskProvider"
+import { EventsList } from "./events /EventsList"
+import { EventsProvider } from "./events /EventsProvider"
+import { EventsForm } from "./events /EventsForm"
 
 
 export const ApplicationViews = () => {
@@ -55,9 +58,15 @@ export const ApplicationViews = () => {
         </Route>
       </TaskProvider>
       
-      <Route path="/events">
-        {/* Render the component for the user's events */}
-      </Route>
+      <EventsProvider>
+        <Route exact path="/events">
+          <EventsList />
+        </Route>
+
+        <Route exact path="/events/create">
+          <EventsForm />
+        </Route>
+      </EventsProvider>
     </>
   )
 }
