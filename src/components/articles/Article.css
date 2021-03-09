@@ -1,3 +1,17 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  overflow-wrap: break-word;
+
+  /* border: 1px solid red; */
+}
+
 .article {
   background: rgba(150, 150, 150, 0.8);
   padding: 0.5em;
@@ -6,6 +20,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   margin-bottom: 20px;
   border-bottom: 5px dashed black;
 }
@@ -20,27 +35,41 @@
 }
 
 .article__link {
-  padding: 1em;
+  padding: 0.5em;
   background: lightblue;
   border-radius: 10px;
-  width: 150px;
+  width: 80px;
   text-align: center;
-  margin: 0 auto;
   text-decoration: none;
   color: black;
 }
 
+.article__router_link {
+  display: block;
+  width: 80px;
+  width: 100%;
+  /* padding: 0.5em; */
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.btn--link {
+  background: #343a40;
+  margin: 0 auto;
+  width: 40%;
+  padding: 0.5em;
+  border-radius: 10px;
+}
+
 /*
-
-
-export const Article = ({ article }) => (
- <div className="article">
-  <h3 className="article__title">{ article.title }</h3>
-  <p className="article__synopsis">{ article.synopsis }</p>
-  <p className="article__poster">Posted by: { article.user.name }</p>
-  <p className="article__timestamp">Posted: { article.timestamp }</p>
-  <a href={ article.url }>View</a>
-  </div>
-
-)
+  <article className="article">
+    <h3 className="article__title">{ article.title }</h3>
+    <p className="article__synopsis">{ article.synopsis }</p>
+    <a className="article__link" href={ article.url }>View</a>
+    <p className="article__poster">Posted by: { article.user.name }</p>
+    <p className="article__timestamp">Posted: { article.timestamp }</p>
+    <button className="btn">
+      <Link to={`/article/detail`}>View</Link>
+    </button>
+  </article>
 */

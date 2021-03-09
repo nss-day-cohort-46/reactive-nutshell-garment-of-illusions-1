@@ -1,52 +1,43 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  overflow-wrap: break-word;
+
+  /* border: 1px solid red; */
+}
+
+.articleForm {
+  background: rgba(150, 150, 150, 0.8);
+  width: 90%;
+  margin: 0 auto;
+}
+
+.articleForm__header {
+  text-align: center;
+  background: lightblue;
+  padding: 1em;
+}
+
+.form-group {
+  padding: 0.2em;
+}
+
+.btn--save {
+  background: #343a40;
+  margin: 0 auto;
+  padding: 1em;
+  color: lightblue;
+  display: block;
+  border-radius: 10px;
+}
+
 /*
- @author - cheo
- @return - article form to add article.
-*/
-import React, { useContext, useState } from "react"
-import { useHistory } from "react-router"
-import { ArticleContext } from "./ArticleProvider"
-import "./ArticleForm.css"
-
-
- const dateOptions = {
-  hour: '2-digit',
-  minute: '2-digit',
-  year: "numeric",
-  month: "numeric",
-  day: "numeric"
- }
-
-
-export const ArticleForm = () => {
-
- const { addArticle } = useContext(ArticleContext)
- const history = useHistory()
-
-
- const [article, setArticles] = useState({
-   userId: parseInt(sessionStorage.getItem("nutshell_user")),
-   url: "",
-   title: "",
-   synopsis: "",
-   timestamp: ""
- })
-
-
- const handleControlledInputChange = ( event ) => {
-  const newArticle = { ...article }
-  const dateObj = new Date()
-
-  newArticle[event.target.id] = event.target.value
-  newArticle.timestamp = `${dateObj.toLocaleDateString('en-US', dateOptions)}`
-
-  setArticles(newArticle)
- } // handleControlledInputcChange
-
-
- const handleSaveArticle = () => {
-  addArticle(article)
-   .then(() => history.push("/"))
- } // handleSaveArticle
 
 
  return (
@@ -100,5 +91,5 @@ export const ArticleForm = () => {
     </button>
    </fieldset>
   </form> 
- ) // return
-}
+
+*/

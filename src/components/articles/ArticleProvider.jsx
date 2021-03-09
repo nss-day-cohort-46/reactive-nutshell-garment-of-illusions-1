@@ -11,22 +11,22 @@ export const ArticleContext = createContext()
 
 export const ArticleProvider = ( props ) => {
 
- const [articles, setArticles] = useState([])
+  const [articles, setArticles] = useState([])
 
- console.log("in ArticleProvider")
 
-const _byDate = (currDate, nextDate) => {
-  /*
-    Sort by month, day, year, time.
-    
-    Workaround to json-server's &_sort= .
-    Does not sort correctly if using double-digit days.
-  */
+  const _byDate = (currDate, nextDate) => {
+    /*
+      Sort by month, day, year, time.
 
-  if ( Date.parse(nextDate.timestamp) < Date.parse(currDate.timestamp) ) { return -1; }
-  if ( Date.parse(nextDate.timestamp) > Date.parse(currDate.timestamp) ) { return 1; }
-  return 0;
-} // _byDate
+      Workaround to json-server's &_sort= .
+      Does not sort correctly if using double-digit days.
+    */
+
+    if ( Date.parse(nextDate.timestamp) < Date.parse(currDate.timestamp) ) { return -1; }
+    if ( Date.parse(nextDate.timestamp) > Date.parse(currDate.timestamp) ) { return 1; }
+    return 0;
+  } // _byDate
+
 
  const getArticles = () => {
   return fetch("http://localhost:8088/articles?_expand=user")
@@ -35,9 +35,24 @@ const _byDate = (currDate, nextDate) => {
    .then(setArticles)
  } // getArticles
 
+
+ const addArticle = ( article ) => {
+   return fetch("http://localhost:8088/articles", {
+     method: "POST",
+     headers: {
+       "Content-Type": "application/json"
+     },
+     body: JSON.stringify(article)
+   })
+    .then(getArticles)
+ } // addArticle
+
+
  return (
   <ArticleContext.Provider value={{
-   articles, getArticles
+   articles,
+   getArticles,
+   addArticle
   }}>
    { props.children }
   </ArticleContext.Provider>

@@ -7,6 +7,7 @@ import React, { useContext, useEffect } from "react"
 import { Article } from "./Article"
 import { ArticleContext } from "./ArticleProvider"
 import "./ArticleList.css"
+import { Link } from "react-router-dom"
 
 
 export const ArticleList = () => {
@@ -19,6 +20,9 @@ export const ArticleList = () => {
  return (
    <section className="articleList">
     <h2 className="articleList__header">Articles</h2>
+    <button className="btn--add">
+      <Link to={`/create`}>Add Article</Link>
+    </button>
     <ul className="articleList__list">
     {
       articles.map(article => <Article key={ article.id } article={ article } />) // articles map
@@ -27,3 +31,4 @@ export const ArticleList = () => {
    </section>
   ) // return
 } // ArticleList
+{/* <Link to={`/employees/detail/${employee.id}`}></Link> */}
