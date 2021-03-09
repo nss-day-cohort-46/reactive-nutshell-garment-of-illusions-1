@@ -1,0 +1,41 @@
+@import "../../index.css";
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  overflow-wrap: break-word;
+
+  /* border: 1px solid red; */
+}
+
+.articleList__header {
+  text-align: center;
+  padding: 0.5em;
+  background: lightblue;
+}
+
+.articleList__list {
+  display: flex;
+  padding: 0.5em;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+/*
+
+   <section className="articleList">
+    <h2 className="articleList__header">Articles</h2>
+    <ul className="articleList__list">
+    {
+      articles.map(article => <Article key={ article.id } article={ article } />) // articles map
+    }
+    </ul>
+   </section>
+   
+*/

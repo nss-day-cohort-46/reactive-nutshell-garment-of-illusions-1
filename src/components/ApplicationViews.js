@@ -5,17 +5,19 @@ import { FriendsProvider } from "./friends/FriendsProvider"
 import { FriendsSearch } from "./friends/FriendsSearch"
 import { UsersProvider } from "./users/UsersProvider"
 import { TaskForm } from "./tasks/TaskForm"
-import {TaskList} from  "./tasks/TaskList"
+import { TaskList } from  "./tasks/TaskList"
 import { TaskProvider } from "./tasks/TaskProvider"
 
 
 export const ApplicationViews = () => {
   return (
     <>
-
-      <Route exact path="/">
-        {/* Render the component for news articles */}
-      </Route>
+      <ArticleProvider>
+        <Route exact path="/">
+          {/* Render the component for news articles */}
+          <ArticleList />
+        </Route>
+      </ArticleProvider>
 
       <FriendsProvider>
       <UsersProvider>
