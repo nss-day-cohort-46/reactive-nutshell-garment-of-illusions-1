@@ -10,6 +10,7 @@ import { TaskProvider } from "./tasks/TaskProvider"
 import { EventsList } from "./events /EventsList"
 import { EventsProvider } from "./events /EventsProvider"
 import { EventsForm } from "./events /EventsForm"
+import { UserEventsProvider } from "./events /UserEventsProvider"
 
 
 export const ApplicationViews = () => {
@@ -46,6 +47,7 @@ export const ApplicationViews = () => {
         </Route>
       </TaskProvider>
       
+      <UserEventsProvider>
       <EventsProvider>
         <Route exact path="/events">
           <EventsList />
@@ -54,7 +56,12 @@ export const ApplicationViews = () => {
         <Route exact path="/events/create">
           <EventsForm />
         </Route>
+
+        <Route exact path="/events/edit/:eventId(\d+)">
+          <EventsForm />
+        </Route>
       </EventsProvider>
+      </UserEventsProvider>
     </>
   )
 }
