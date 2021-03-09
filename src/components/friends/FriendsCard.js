@@ -21,6 +21,11 @@ export const FriendsCard = (props) => {
     .then(history.push("/friends"))
   }
 
+  const handleRemoveFriend = (event => {
+    const [prefix, id] = event.target.id.split("--")
+    
+  })
+
   if (searchTerms !== ""){
     return (
       <div className="friend">
@@ -32,6 +37,7 @@ export const FriendsCard = (props) => {
     return (
       <div className="friend">
         <div className="friend__name">{props.friend.name}</div>
+        <button className="friend__removeFriend" id={`btn--${props.friend.id}`} onClick={handleRemoveFriend} >Remove Friend</button>
       </div>
     )
   }

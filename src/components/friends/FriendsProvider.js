@@ -22,9 +22,16 @@ export const FriendsProvider = (props) => {
     .then(getFriends)
   }
 
+  const removeFriends = (id) => {
+    return fetch(`http://localhost:8088/friends/${id}`, {
+      method: "DELETE"
+    })
+    .then(getFriends)
+  }
+
   return (
     <FriendsContext.Provider value={{
-      friends, getFriends, addFriends
+      friends, getFriends, addFriends, removeFriends
     }}>
       {props.children}
     </FriendsContext.Provider>
