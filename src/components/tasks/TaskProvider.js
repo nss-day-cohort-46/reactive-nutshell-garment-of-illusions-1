@@ -13,12 +13,16 @@ export const TaskProvider = (props) => {
             },
             body: JSON.stringify(task)
         })
-        .then(getTasks)
+        .then(()=>getTasks(parseInt(sessionStorage.getItem("nutshell_user"))))
     }
-    const getTasks = () => {
-        return fetch("http://localhost:8088/tasks")
+    const getTasks = (userId) => {
+        return fetch(`http://localhost:8088/tasks?userId=${userId}`)
         .then(res => res.json())
         .then(setTasks)
+    }
+    const getTaskById = (taskId) => {
+        return fetch(`http://localhost:8088/tasks/${taskId}`)
+        .then(res => res.json())
     }
     const completeTask = (taskId) => {
         return fetch(`http://localhost:8088/tasks/${taskId}`,{
@@ -30,18 +34,28 @@ export const TaskProvider = (props) => {
                 completed:true
             })
         })
-        .then(getTasks)
+        .then(()=>getTasks(parseInt(sessionStorage.getItem("nutshell_user"))))
     }
     const removeTask = (taskId) => {
         return fetch(`http://localhost:8088/tasks/${taskId}`, {
             method: "DELETE"
         })
-        .then(getTasks)
+        .then(()=>getTasks(parseInt(sessionStorage.getItem("nutshell_user"))))
 
+    }
+    const updateTask = (task) => {
+        return fetch(`http://localhost:8088/tasks/${task.id}`, {
+            method:"PUT",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(task)
+        })
+        .then(()=>getTasks(parseInt(sessionStorage.getItem("nutshell_user"))))
     }
 
     return(
-        <TaskContext.Provider value= {{tasks, getTasks, addTask, setTasks, removeTask, completeTask}}>
+        <TaskContext.Provider value= {{tasks, getTasks, addTask, setTasks, removeTask, completeTask, updateTask, getTaskById}}>
             {props.children}
         </TaskContext.Provider>
     )
