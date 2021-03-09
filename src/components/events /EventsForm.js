@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react"
-import { useHistory } from "react-router-dom"
+import React, { useContext, useEffect, useState } from "react"
+import { useHistory, useParams } from "react-router-dom"
 import { EventsContext } from "./EventsProvider"
 
 export const EventsForm = () => {
-  const {saveEvent} = useContext(EventsContext)
+  const {saveEvent, getEvents, getEventById, updateEvent} = useContext(EventsContext)
 
+  const {eventId} = useParams()
   const history = useHistory()
 
   const [newEvent, setEvent] = useState({
@@ -12,6 +13,18 @@ export const EventsForm = () => {
     location: "",
     date: ""
   })
+
+  useEffect(() => {
+    getEvents()
+    .then(() => {
+      if (eventId){
+        getEventById(eventId)
+        .then(event => {
+          setEvent(event)
+        })
+      }
+    })
+  }, [])
 
   const handleInputChange = (event) => {
     const eventObj = {...newEvent}
@@ -22,8 +35,18 @@ export const EventsForm = () => {
   }
 
   const handleSaveEvent = (event) => {
-    saveEvent(newEvent)
-    .then(history.push("/events"))
+    if (eventId){
+      updateEvent({
+        name: newEvent.name,
+        location: newEvent.location,
+        date: newEvent.date,
+        id: newEvent.id
+      })
+      .then(history.push("/events"))
+    } else {
+      saveEvent(newEvent)
+      .then(history.push("/events"))
+    }
   }
 
   return (
@@ -52,7 +75,7 @@ export const EventsForm = () => {
             event.preventDefault()
             handleSaveEvent()
           }}>
-        Save Event</button>
+        {eventId ? "Edit Event" : "Save Event"}</button>
     </form>
   )
 }
