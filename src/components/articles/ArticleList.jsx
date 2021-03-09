@@ -31,4 +31,3 @@ export const ArticleList = () => {
    </section>
   ) // return
 } // ArticleList
-{/* <Link to={`/employees/detail/${employee.id}`}></Link> */}
