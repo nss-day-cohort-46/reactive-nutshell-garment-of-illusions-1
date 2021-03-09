@@ -56,10 +56,3 @@ export const Article = ({ article }) => {
     </article>
   )
 }
-
-
-              // onClick={(event) => {
-              //   event.preventDefault()
-              //   editArticle
-              //   deleteArticle(article.id).then(() => history.push("/")) }}>
-              // Edit

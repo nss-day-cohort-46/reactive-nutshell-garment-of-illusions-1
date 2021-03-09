@@ -62,9 +62,14 @@ export const ArticleForm = () => {
     addArticle(article)
       .then(() => history.push("/"))
    } else {
-     updateArticle(article)
-      .then(getArticles)
-      .then(() => history.push("/"))
+      if (parseInt(sessionStorage.getItem("nutshell_user")) === article.userId) {
+      updateArticle(article)
+        .then(getArticles)
+        .then(() => history.push("/"))
+      } else {
+        window.alert("You cannot edit this post")
+        history.push("/")
+      }
    }
  } // handleSaveArticle
 
