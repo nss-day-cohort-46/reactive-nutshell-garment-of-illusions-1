@@ -15,21 +15,24 @@ export const ApplicationViews = () => {
 
       <FriendsProvider>
       <UsersProvider>
-        <Route path="/friends">
+        <Route exact path="/friends">
           {/* Render the component for list of friends */}
-          <FriendsSearch />
           <FriendsList />
+        </Route>
+
+        <Route exact path="/friends/search">
+          <FriendsSearch />
         </Route>
       </UsersProvider>
       </FriendsProvider>
 
-      <Route path="/messages">
+      <Route exact path="/messages">
         {/* Render the component for the messages */}
       </Route>
-      <Route path="/tasks">
+      <Route exact path="/tasks">
         {/* Render the component for the user's tasks */}
       </Route>
-      <Route path="/events">
+      <Route exact path="/events">
         {/* Render the component for the user's events */}
       </Route>
     </>
