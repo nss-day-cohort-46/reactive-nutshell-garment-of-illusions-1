@@ -1,8 +1,10 @@
 import { useContext } from "react"
+import { useHistory } from "react-router-dom"
 import { TaskContext } from "./TaskProvider"
 
 export const Task = ({ task }) => {
     const {completeTask} = useContext(TaskContext)
+    const history = useHistory()
     const complete = () => {
         completeTask(task.id)
     }
@@ -14,5 +16,6 @@ export const Task = ({ task }) => {
         <div className="completed">Completed : {String(task.completed)}</div>
         <button key={task.id} onClick={complete}>complete</button> 
         <button onClick={(event) => removeTask(task.id)}>Delete Task</button>
+        <button onClick={(event) => history.push(`tasks/edit/${task.id}`)}>Edit Task</button>
     </section>
   )}

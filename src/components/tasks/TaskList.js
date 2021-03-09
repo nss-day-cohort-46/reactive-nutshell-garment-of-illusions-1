@@ -8,7 +8,7 @@ export const TaskList = () => {
     const {getTasks, tasks} = useContext(TaskContext)
 
     useEffect(()=> {
-        getTasks()
+        getTasks(parseInt(sessionStorage.getItem("nutshell_user")))
     },[])
 
     return (
