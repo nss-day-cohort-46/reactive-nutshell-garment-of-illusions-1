@@ -3,7 +3,7 @@
  @return - article form to add article.
 */
 import React, { useContext, useState } from "react"
-import { useHistory } from "react-router"
+import { useHistory, useParams } from "react-router"
 import { ArticleContext } from "./ArticleProvider"
 import "./ArticleForm.css"
 
@@ -21,6 +21,8 @@ export const ArticleForm = () => {
 
  const { addArticle } = useContext(ArticleContext)
  const history = useHistory()
+ const { articleId } = useParams()
+
 
 
  const [article, setArticles] = useState({

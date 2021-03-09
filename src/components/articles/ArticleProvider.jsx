@@ -31,7 +31,6 @@ export const ArticleProvider = ( props ) => {
  const getArticles = () => {
   return fetch("http://localhost:8088/articles?_expand=user")
    .then(res => res.json())
-   .then(data => data.sort(_byDate))
    .then(setArticles)
  } // getArticles
 
@@ -48,13 +47,25 @@ export const ArticleProvider = ( props ) => {
  } // addArticle
 
 
+ const deleteArticle = ( articleId ) => {
+   console.log(`article idd: ${articleId}`)
+  //  debugger
+   return fetch(`http://localhost:8088/articles/${articleId}`, {
+     method: "DELETE"
+   })
+    .then(getArticles)
+ } // deleteArticle
+
+
  return (
   <ArticleContext.Provider value={{
    articles,
    getArticles,
-   addArticle
+   addArticle,
+   deleteArticle
   }}>
    { props.children }
   </ArticleContext.Provider>
  ) // return
 } // getArticles
+  //  .then(data => data.sort(_byDate))

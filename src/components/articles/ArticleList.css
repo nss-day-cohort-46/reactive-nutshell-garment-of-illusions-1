@@ -32,19 +32,3 @@
   margin-left: 2.5em;
   padding: 0.5em;
 }
-
-/*
-
-   <section className="articleList">
-    <h2 className="articleList__header">Articles</h2>
-    <button className="btn">
-      <Link to={`/create`}>Add Article</Link>
-    </button>
-    <ul className="articleList__list">
-    {
-      articles.map(article => <Article key={ article.id } article={ article } />) // articles map
-    }
-    </ul>
-   </section>
-   
-*/
