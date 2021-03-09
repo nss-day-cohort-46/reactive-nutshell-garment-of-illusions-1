@@ -26,10 +26,6 @@ export const ApplicationViews = () => {
         </Route>
       </ArticleProvider>
 
-      <Route exact path="/">
-        {/* Render the component for news articles */}
-      </Route>
-
       <FriendsProvider>
       <UsersProvider>
         <Route exact path="/friends">
