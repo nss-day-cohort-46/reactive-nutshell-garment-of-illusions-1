@@ -14,7 +14,8 @@
   border: 1px solid red;
 }
 
-.messageList__header {
+.messageList__header,
+.messageList__send {
   text-align: center;
   padding: 0.5em;
   background: lightblue;

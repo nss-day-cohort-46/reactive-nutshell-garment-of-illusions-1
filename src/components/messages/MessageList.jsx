@@ -17,16 +17,32 @@ export const MessageList = () => {
   getMessages()
  }, []) // useEffect
 
- const filtered = messages.filter(message => message.curentUserId === currentUserId)
+ const filteredReceived = messages.filter(message => message.curentUserId === currentUserId)
+ const filteredSent = messages.filter(message => message.userId === currentUserId)
+
 
  return (
-  <section className="messageList">
-   <h2 className="messageList__header">Messages</h2>
-    <ul className="messageList__list">
-     {
-      filtered.map(message => <Message key={message.id} message={message} />)
-     }
-    </ul>
-  </section>
+  <>
+   <section className="messageList">
+    <h2 className="messageList__header">Messages</h2>
+     <ul className="messageList__list">
+      {
+       filteredReceived.map(message => <Message key={message.id} message={message} />)
+      }
+     </ul>
+   </section>
+
+   <input type="text"/>
+   
+     <section className="messageList">
+    <h2 className="messageList__send">Send</h2>
+     <ul className="messageList__list">
+      {
+       filteredSent.map(message => <Message key={message.id} message={message} />)
+      }
+     </ul>
+   </section>
+  </>
+  
  ) // return
 } // MessageList
