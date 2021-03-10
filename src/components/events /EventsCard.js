@@ -25,29 +25,33 @@ export const EventsCard = (props) => {
     const date = new Date(props.event.date)
     const todaysDate = new Date()
     const daysAway = Math.ceil((date - todaysDate) / (1000 * 60 * 60 * 24))
-    if (daysAway < 7){
-      getEventWeather(daysAway).then(weather => {
+    if(daysAway > 0){
+      if (daysAway < 7){
+        getEventWeather(daysAway).then(weather => {
+          const tempWeather = {
+            description: weather.weather[0].description,
+            temp: (((weather.temp.day - 273.15) * (9/5)) + 32).toFixed(2),
+            humidity: weather.humidity,
+            wind: weather.wind_speed
+          }
+          setWeather(tempWeather)
+          setGotWeather(true)
+        })
+      }else{
+        getTodaysWeather().then((weather)=> {
         const tempWeather = {
-          description: weather.weather[0].description,
-          temp: (((weather.temp.day - 273.15) * (9/5)) + 32).toFixed(2),
-          humidity: weather.humidity,
-          wind: weather.wind_speed
+            description: weather.weather[0].description,
+            temp: (((weather.main.temp - 273.15) * (9/5)) + 32).toFixed(2),
+            humidity: weather.main.humidity,
+            wind: weather.wind.speed
         }
         setWeather(tempWeather)
-        setGotWeather(true)
-      })
+        setGotWeather(false)
+    })
+    }
     }else{
-      getTodaysWeather().then((weather)=> {
-      const tempWeather = {
-          description: weather.weather[0].description,
-          temp: (((weather.main.temp - 273.15) * (9/5)) + 32).toFixed(2),
-          humidity: weather.main.humidity,
-          wind: weather.wind.speed
-      }
-      setWeather(tempWeather)
-      setGotWeather(false)
-  })
-  }
+      alert("Event already Happened")
+    }
     
   }
 
