@@ -9,16 +9,19 @@ import { ArticleContext } from "./ArticleProvider"
 import "./ArticleList.css"
 import { Link } from "react-router-dom"
 import { FriendsContext } from "../friends/FriendsProvider"
+import { WeatherContext } from "../weather/WeatherProvider"
 
 
 export const ArticleList = () => {
  const { articles, getArticles } = useContext(ArticleContext)
  const { friends, getFriends } = useContext(FriendsContext)
+ const { getTodaysWeather } = useContext(WeatherContext)
 
  const userId = parseInt(sessionStorage.nutshell_user)
  
  useEffect(() => {
-  getFriends()
+  getTodaysWeather()
+  .then(getFriends)
   .then(getArticles)
  }, []) // useEffect
 
