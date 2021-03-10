@@ -19,9 +19,9 @@ export const FriendsList = () => {
 
   return (
     <>
-    <h2>Friends List</h2>
+    <h2 className="friends__title">Friends List</h2>
     <Link to="/friends/search">
-    <button className="friends__searchBtn" >Add a Friend</button>
+    <button className="friends__searchBtn friends__btn" >Add Friend</button>
     </Link>
     <div className="friends">
       {
