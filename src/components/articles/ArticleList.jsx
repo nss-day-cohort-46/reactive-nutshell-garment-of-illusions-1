@@ -15,13 +15,11 @@ import { WeatherContext } from "../weather/WeatherProvider"
 export const ArticleList = () => {
  const { articles, getArticles } = useContext(ArticleContext)
  const { friends, getFriends } = useContext(FriendsContext)
- const { getTodaysWeather } = useContext(WeatherContext)
 
  const userId = parseInt(sessionStorage.nutshell_user)
  
  useEffect(() => {
-  getTodaysWeather()
-  .then(getFriends)
+  getFriends()
   .then(getArticles)
  }, []) // useEffect
 

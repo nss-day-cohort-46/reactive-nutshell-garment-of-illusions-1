@@ -5,7 +5,7 @@ export const WeatherContext = createContext()
 
 export const WeatherProvider = (props) => {
     const getTodaysWeather = () => {
-        return fetch(`api.openweathermap.org/data/2.5/weather?q=Nashville&appid=8f01d52d478e3ec2c957316c7958823d`)
+        return fetch(`http://api.openweathermap.org/data/2.5/weather?q=Nashville&appid=${weatherKey}`)
         .then(res => res.json())
     }
     return (

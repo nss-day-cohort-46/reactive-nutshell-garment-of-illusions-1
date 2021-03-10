@@ -27,6 +27,7 @@ export const ApplicationViews = () => {
         <Route exact path="/">
           {/* Render the component for news articles */}
           <ArticleList />
+          <WeatherList />
         </Route>
         <Route exact path="/create">
           {/* Render the component for news articles */}
