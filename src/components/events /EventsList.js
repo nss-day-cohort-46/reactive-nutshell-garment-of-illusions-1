@@ -35,7 +35,7 @@ export const EventsList = () => {
     return (
       <>
       <Link to="/events/create">
-      <button className="btn--addEvent">Add Event</button>
+      <button className="btn--addEvent event__btn">Add Event</button>
       </Link>
       <div className="events">
         {

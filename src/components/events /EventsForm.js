@@ -70,7 +70,7 @@ export const EventsForm = () => {
           <input type="date" id="date" onChange={handleInputChange} required className="form-control" placeholder="Event Date..." value={newEvent.date} />
         </div>
       </fieldset>
-      <button className="btn btn-primary"
+      <button className="event__btn btn-primary"
           onClick={event => {
             event.preventDefault()
             handleSaveEvent()
