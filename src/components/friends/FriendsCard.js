@@ -38,14 +38,14 @@ export const FriendsCard = (props) => {
     return (
       <div className="friend">
         <div className="friend__name">{props.friend.name}</div>
-        <button className="friend__addFriend" id={`btn--${props.friend.id}`} onClick={handleAddFriend} >Add Friend</button>
+        <button className="friend__addFriend friends__btn" id={`btn--${props.friend.id}`} onClick={handleAddFriend} >Add Friend</button>
       </div>
     )
   }else {
     return (
       <div className="friend">
         <div className="friend__name">{props.friend.name}</div>
-        <button className="friend__removeFriend" id={`btn--${props.friend.id}`} onClick={handleRemoveFriend} >Remove Friend</button>
+        <button className="friend__removeFriend friends__btn" id={`btn--${props.friend.id}`} onClick={handleRemoveFriend} >Remove Friend</button>
       </div>
     )
   }
