@@ -25,7 +25,7 @@ export const EventsCard = (props) => {
     const date = new Date(props.event.date)
     const todaysDate = new Date()
     const daysAway = Math.ceil((date - todaysDate) / (1000 * 60 * 60 * 24))
-    if(daysAway > 0){
+    if(daysAway >= 0){
       if (daysAway < 7){
         getEventWeather(daysAway).then(weather => {
           const tempWeather = {
