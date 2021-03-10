@@ -7,7 +7,7 @@ export const EventsCard = (props) => {
 
   const showEditButton = (eventObj) => {
     if (eventObj.userId === userId && eventObj.creator === true){
-      return <button className="event__editButton" onClick={() => {history.push(`/events/edit/${eventObj.id}`)}}>Edit Event</button>
+      return <button className="event__editButton event__btn" onClick={() => {history.push(`/events/edit/${eventObj.id}`)}}>Edit Event</button>
     }
   }
 

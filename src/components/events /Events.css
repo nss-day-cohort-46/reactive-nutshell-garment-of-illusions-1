@@ -1,15 +1,6 @@
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  box-sizing: border-box;
-  text-decoration: none;
-  list-style: none;
-  overflow-wrap: break-word;
-
-  /* border: 1px solid red; */
+.events {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .event {
@@ -21,27 +12,37 @@
   flex-direction: column;
   justify-content: space-between;
 
-  margin-bottom: 20px;
+  margin: 10px 10px;
   border-bottom: 5px dashed black;
 }
 
-.btn--container {
-  display: flex;
-  justify-content: space-around;
+.btn--addEvent {
+  margin: 10px 10px;
+  padding: 5px
 }
 
-.btn--link,
-.btn--delete {
-  padding: 1em;
-  border-radius: 10px;
-  display: block;
-  width: 40%;
-}
-
-.btn--link {
+.event__btn {
   background: #343a40;
+  color: #007bff;
 }
 
-.btn--delete {
-  background: pink;
+.btn--addEvent {
+  border-radius: 5px;
 }
+
+.event__saveBtn {
+  margin: 10px;
+  padding: 5px;
+}
+
+.events__title,
+.eventForm__title {
+  padding: 0.5em;
+  background: lightblue;
+  text-align: center;
+}
+
+.eventForm {
+  margin: 10px;
+}
+

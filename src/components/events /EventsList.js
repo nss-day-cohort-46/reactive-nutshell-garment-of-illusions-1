@@ -34,8 +34,9 @@ export const EventsList = () => {
   if (filteredEvents.includes(undefined) === false){
     return (
       <>
+      <h2 className="events__title">Events</h2>
       <Link to="/events/create">
-      <button className="btn--addEvent">Add Event</button>
+      <button className="btn--addEvent event__btn">Add Event</button>
       </Link>
       <div className="events">
         {
