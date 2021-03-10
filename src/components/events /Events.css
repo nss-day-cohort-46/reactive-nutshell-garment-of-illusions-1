@@ -29,3 +29,20 @@
 .btn--addEvent {
   border-radius: 5px;
 }
+
+.event__saveBtn {
+  margin: 10px;
+  padding: 5px;
+}
+
+.events__title,
+.eventForm__title {
+  padding: 0.5em;
+  background: lightblue;
+  text-align: center;
+}
+
+.eventForm {
+  margin: 10px;
+}
+

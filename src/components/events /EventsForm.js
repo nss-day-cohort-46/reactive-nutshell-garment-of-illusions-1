@@ -50,8 +50,9 @@ export const EventsForm = () => {
   }
 
   return (
+    <>
+    <h2 className="eventForm__title">New Event</h2>
     <form className="eventForm">
-      <h2 className="eventForm__title">New Event</h2>
       <fieldset className="form-group">
         <div>
           <label htmlFor="eventName">Event Name: </label>
@@ -70,12 +71,13 @@ export const EventsForm = () => {
           <input type="date" id="date" onChange={handleInputChange} required className="form-control" placeholder="Event Date..." value={newEvent.date} />
         </div>
       </fieldset>
-      <button className="event__btn btn-primary"
+      <button className="event__btn event__saveBtn btn-primary"
           onClick={event => {
             event.preventDefault()
             handleSaveEvent()
           }}>
         {eventId ? "Edit Event" : "Save Event"}</button>
     </form>
+    </>
   )
 }
