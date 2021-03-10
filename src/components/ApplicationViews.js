@@ -14,6 +14,8 @@ import { EventsList } from "./events /EventsList"
 import { EventsProvider } from "./events /EventsProvider"
 import { EventsForm } from "./events /EventsForm"
 import { UserEventsProvider } from "./events /UserEventsProvider"
+import { MessageProvider } from "./messages/MessageProvider"
+import { MessageList } from "./messages/MessageList"
 
 
 export const ApplicationViews = () => {
@@ -49,9 +51,12 @@ export const ApplicationViews = () => {
       </UsersProvider>
       </FriendsProvider>
 
-      <Route exact path="/messages">
-        {/* Render the component for the messages */}
-      </Route>
+      <MessageProvider>
+        <Route exact path="/messages">
+          {/* Render the component for the messages */}
+          <MessageList />
+        </Route>
+      </MessageProvider>
 
       <TaskProvider>
         <Route exact path="/tasks">
