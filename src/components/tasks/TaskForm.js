@@ -21,7 +21,6 @@ export const TaskForm = () => {
     const handleInputChange = (event) => {
         const newTask = {...task}
         newTask[event.target.id] = event.target.value
-        console.log(newTask)
         setTask(newTask)
     }
     const saveTask = () => {
