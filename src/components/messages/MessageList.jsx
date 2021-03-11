@@ -6,6 +6,7 @@
 import React, { useContext, useEffect } from "react"
 import { Message } from "./Message"
 import { MessageContext } from "./MessageProvider"
+import { UsersContext } from "../users/UsersProvider"
 import "./MessageList.css"
 
 import { MessageForm } from "./MessageForm"
@@ -14,14 +15,23 @@ import { MessageForm } from "./MessageForm"
 export const MessageList = () => {
 
  const { messages, getMessages } = useContext(MessageContext)
+ const { users, getUsers } = useContext(UsersContext)
  const currentUserId = parseInt(sessionStorage.getItem("nutshell_user"))
 
  useEffect(() => {
-  getMessages()
+  getMessages().then(getUsers)
  }, []) // useEffect
+
 
  const filteredReceived = messages.filter(message => message.curentUserId === currentUserId)
  const filteredSent = messages.filter(message => message.userId === currentUserId)
+ filteredSent.forEach(message => message.canEdit = true)
+ filteredSent.forEach(message => {
+   let user = users.find(user => user.id == message.curentUserId)
+   message.recipient = user.name
+ })
+
+
  
  let allMessagesExceptPrivate = []
  let privateMessages = []

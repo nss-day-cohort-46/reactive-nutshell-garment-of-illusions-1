@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react"
 import { UsersContext } from "../users/UsersProvider"
 import { MessageContext } from "./MessageProvider"
 import "./MessageForm.css"
+import { useHistory, useParams } from "react-router"
 
 
 const dateOptions = {
@@ -20,7 +21,7 @@ const dateOptions = {
 export const MessageForm = () => {
 
   const { users, getUsers } = useContext(UsersContext)
-  const { getMessages, sendMessage } = useContext(MessageContext)
+  const { getMessages, sendMessage, getMessageById } = useContext(MessageContext)
 
   const [canViewMessageField, setCanViewMessageField] = useState(false)
   const [canSendMesssage, setCanSendMesssage] = useState(false)
@@ -31,6 +32,9 @@ export const MessageForm = () => {
     searchInput: "",
     message: ""
   })
+
+  const { messageId } = useParams()
+  const history = useHistory()
 
 
   const handleControlledInputChange = ( event ) =>  {
@@ -67,7 +71,7 @@ export const MessageForm = () => {
         message: ""
       })
       window.alert("Message Sent")
-    })
+    }).then(history.push("/messages"))
 
   } // handleSendMessage
 
@@ -99,6 +103,30 @@ export const MessageForm = () => {
 
   useEffect(() => {
     getUsers()
+    
+    if(messageId) {
+
+      setCanViewMessageField(true)
+      setCanSendMesssage(true)
+      getMessageById(messageId)
+        .then(msg => {
+          /*
+            If recipient no longer exisits.
+          */
+          let user = users.find(user => user.id === msg.curentUserId)
+          if(user === undefined) {
+            user = {
+              name: "Recipient Not Available"
+            }
+          }
+          const newFormField = {
+            searchInput: user.name,
+            message: msg.text
+          }
+          setFormField(newFormField)
+
+        })
+    } // if
   }, []) // useEffect
 
 
@@ -118,9 +146,11 @@ export const MessageForm = () => {
 
     if(formField.searchInput && formField.message) {
       setCanSendMesssage(true)
+      setCanViewMessageField(true)
     } else {
       setCanSendMesssage(false)
     }
+
 
   }, [formField]) // useEffect
 

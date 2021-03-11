@@ -18,6 +18,7 @@ import { MessageProvider } from "./messages/MessageProvider"
 import { MessageList } from "./messages/MessageList"
 import { WeatherProvider } from "./weather/WeatherProvider"
 import { WeatherList } from "./weather/WeatherList"
+import { MessageForm } from "./messages/MessageForm"
 
 
 export const ApplicationViews = () => {
@@ -61,6 +62,10 @@ export const ApplicationViews = () => {
         <Route exact path="/messages">
           {/* Render the component for the messages */}
           <MessageList />
+        </Route>
+        <Route exact path="/messages/edit/:messageId(\d+)">
+          {/* Render the component for the messages */}
+          <MessageForm />
         </Route>
       </UsersProvider></MessageProvider>
 
