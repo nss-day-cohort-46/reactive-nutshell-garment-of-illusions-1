@@ -30,7 +30,7 @@ export const EventsList = () => {
     matchingEvent.creator = ue.creator
     return matchingEvent
   })
-
+  filteredEvents.sort((a,b)=> new Date(a.date) - new Date(b.date))
   if (filteredEvents.includes(undefined) === false){
     return (
       <>
@@ -39,6 +39,7 @@ export const EventsList = () => {
       <button className="btn--addEvent event__btn">Add Event</button>
       </Link>
       <div className="events">
+        
         {
           filteredEvents.map(event => {
             return <EventsCard key={event.id} event={event} />

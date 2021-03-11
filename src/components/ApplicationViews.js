@@ -70,24 +70,25 @@ export const ApplicationViews = () => {
           <TaskForm/>
         </Route>
       </TaskProvider>
-      
-      <FriendsProvider>
-      <UserEventsProvider>
-      <EventsProvider>
-        <Route exact path="/events">
-          <EventsList />
-        </Route>
+      <WeatherProvider>
+        <FriendsProvider>
+        <UserEventsProvider>
+        <EventsProvider>
+          <Route exact path="/events">
+            <EventsList />
+          </Route>
 
-        <Route exact path="/events/create">
-          <EventsForm />
-        </Route>
+          <Route exact path="/events/create">
+            <EventsForm />
+          </Route>
 
-        <Route exact path="/events/edit/:eventId(\d+)">
-          <EventsForm />
-        </Route>
-      </EventsProvider>
-      </UserEventsProvider>
-      </FriendsProvider>
+          <Route exact path="/events/edit/:eventId(\d+)">
+            <EventsForm />
+          </Route>
+        </EventsProvider>
+        </UserEventsProvider>
+        </FriendsProvider>
+      </WeatherProvider>
     </>
   )
 }
