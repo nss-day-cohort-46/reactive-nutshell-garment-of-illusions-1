@@ -14,16 +14,12 @@
   /* border: 1px solid red; */
 }
 
-.messageList__header,
-.messageList__send {
-  text-align: center;
-  padding: 0.5em;
-  background: lightblue;
+.btn--save:disabled {
+  background: red;
 }
 
-.messageList__list {
-  display: flex;
-  padding: 0.5em;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.btn--save {
+  background: green;
+  width: 200px;
+  padding: 1em;
 }
