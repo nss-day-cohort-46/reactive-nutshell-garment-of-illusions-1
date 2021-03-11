@@ -22,7 +22,20 @@ export const MessageList = () => {
 
  const filteredReceived = messages.filter(message => message.curentUserId === currentUserId)
  const filteredSent = messages.filter(message => message.userId === currentUserId)
- const allMessagesExceptPrivate = messages.filter(message => !message.text.startsWith("@PRIVATE-")).map(msg => {
+ 
+ let allMessagesExceptPrivate = []
+ let privateMessages = []
+
+ messages.forEach(msg => {
+   if(msg.text.startsWith("@PRIVATE-")) {
+     privateMessages.push(msg)
+   } else {
+     allMessagesExceptPrivate.push(msg)
+   }
+ })
+
+
+ allMessagesExceptPrivate = allMessagesExceptPrivate.map(msg => {
   return `
   From: ${ msg.userId }
   To: ${ msg.curentUserId }
@@ -30,6 +43,18 @@ export const MessageList = () => {
   Time: ${ msg.timestamp }
   `
  }).join("\n")
+
+
+ privateMessages = privateMessages.map(msg => {
+   const text = msg.text.split("@PRIVATE-")[1]
+  return `
+  From: ${ msg.userId }
+  To: ${ msg.curentUserId }
+  Msg: ${ text }
+  Time: ${ msg.timestamp }
+  `
+ }).join("\n")
+
 
  return (
   <main className="mainMessage">
@@ -40,11 +65,22 @@ export const MessageList = () => {
       id="message" 
       cols="30" 
       rows="10" 
-      className="form-control" 
+      className="form-control msgBoard" 
       placeholder="Message"
        value={allMessagesExceptPrivate}
       autoFocus>
-      </textarea>
+    </textarea>
+    <h2 className="messageList__header">Private Message Board</h2>
+    <textarea 
+      name="message" 
+      id="message" 
+      cols="30" 
+      rows="10" 
+      className="form-control msgBoard" 
+      placeholder="Message"
+       value={privateMessages}
+      autoFocus>
+    </textarea>
    </section>
   <section className="forMessages">
     <section className="messageList">
