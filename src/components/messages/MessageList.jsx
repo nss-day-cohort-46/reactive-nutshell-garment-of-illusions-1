@@ -8,6 +8,9 @@ import { Message } from "./Message"
 import { MessageContext } from "./MessageProvider"
 import "./MessageList.css"
 
+import { MessageForm } from "./MessageForm"
+
+
 export const MessageList = () => {
 
  const { messages, getMessages } = useContext(MessageContext)
@@ -32,10 +35,11 @@ export const MessageList = () => {
      </ul>
    </section>
 
-   <input type="text"/>
-   
-     <section className="messageList">
+    <section className="messageList">
     <h2 className="messageList__send">Send</h2>
+
+    <MessageForm />
+
      <ul className="messageList__list">
       {
        filteredSent.map(message => <Message key={message.id} message={message} />)
@@ -43,6 +47,5 @@ export const MessageList = () => {
      </ul>
    </section>
   </>
-  
  ) // return
 } // MessageList

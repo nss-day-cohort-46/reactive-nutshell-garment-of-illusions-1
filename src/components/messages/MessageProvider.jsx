@@ -30,11 +30,29 @@ export const MessageProvider = ( props ) => {
    .then(data => data.sort(_byDate))
    .then(setMessages)
  } // getMessages
+
+
+ const sendMessage = ( message ) => {
+    // add to db
+    console.log("\n in send message, message ready to POST")
+    console.log(message)
+    console.table(message)
+    return fetch(`http://localhost:8088/messages`, {
+     method: "POST",
+     headers: {
+       "Content-Type": "application/json"
+     },
+     body: JSON.stringify(message)
+   })
+    .then(getMessages)
+
+ } // sendMessage
  
  return (
   <MessageContext.Provider value={{
    messages,
-   getMessages
+   getMessages,
+   sendMessage
   }}>
    { props.children }
   </MessageContext.Provider>
