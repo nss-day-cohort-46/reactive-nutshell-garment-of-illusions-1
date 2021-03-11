@@ -1,0 +1,31 @@
+@import "../../index.css";
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  overflow-wrap: break-word;
+
+  /* border: 1px solid red; */
+}
+
+.message {
+  background: rgba(150, 150, 150, 0.8);
+  padding: 0.5em;
+  margin-bottom: 20px;
+  border-bottom: 5px dashed black;
+}
+
+.message__title {
+  padding: 0.5em;
+  text-align: center;
+}
+
+.message__text {
+  padding: 0.5em;
+}

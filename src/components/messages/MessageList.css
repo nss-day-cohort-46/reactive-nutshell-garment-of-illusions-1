@@ -1,0 +1,39 @@
+@import "../../index.css";
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  overflow-wrap: break-word;
+
+  /* border: 1px solid red; */
+}
+
+.mainMessage {
+  display: flex;
+  justify-content: space-around;
+}
+
+.forMessageBoard,
+.forMessages {
+  width: 40%;
+}
+
+.messageList__header,
+.messageList__send {
+  text-align: center;
+  padding: 0.5em;
+  background: lightblue;
+}
+
+.messageList__list {
+  display: flex;
+  padding: 0.5em;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

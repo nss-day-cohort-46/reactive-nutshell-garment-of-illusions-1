@@ -14,7 +14,9 @@ import { EventsList } from "./events /EventsList"
 import { EventsProvider } from "./events /EventsProvider"
 import { EventsForm } from "./events /EventsForm"
 import { UserEventsProvider } from "./events /UserEventsProvider"
-import {WeatherProvider} from "./weather/WeatherProvider"
+import { MessageProvider } from "./messages/MessageProvider"
+import { MessageList } from "./messages/MessageList"
+import { WeatherProvider } from "./weather/WeatherProvider"
 import { WeatherList } from "./weather/WeatherList"
 
 
@@ -55,9 +57,12 @@ export const ApplicationViews = () => {
       </UsersProvider>
       </FriendsProvider>
 
-      <Route exact path="/messages">
-        {/* Render the component for the messages */}
-      </Route>
+      <MessageProvider><UsersProvider>
+        <Route exact path="/messages">
+          {/* Render the component for the messages */}
+          <MessageList />
+        </Route>
+      </UsersProvider></MessageProvider>
 
       <TaskProvider>
         <Route exact path="/tasks">
