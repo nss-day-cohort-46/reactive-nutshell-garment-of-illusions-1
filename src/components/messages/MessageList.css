@@ -14,6 +14,16 @@
   /* border: 1px solid red; */
 }
 
+.mainMessage {
+  display: flex;
+  justify-content: space-around;
+}
+
+.forMessageBoard,
+.forMessages {
+  width: 40%;
+}
+
 .messageList__header,
 .messageList__send {
   text-align: center;

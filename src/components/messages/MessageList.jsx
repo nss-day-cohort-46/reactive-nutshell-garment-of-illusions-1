@@ -22,30 +22,53 @@ export const MessageList = () => {
 
  const filteredReceived = messages.filter(message => message.curentUserId === currentUserId)
  const filteredSent = messages.filter(message => message.userId === currentUserId)
-
+ const allMessagesExceptPrivate = messages.filter(message => !message.text.startsWith("@PRIVATE-")).map(msg => {
+  return `
+  From: ${ msg.userId }
+  To: ${ msg.curentUserId }
+  Msg: ${ msg.text }
+  Time: ${ msg.timestamp }
+  `
+ }).join("\n")
 
  return (
-  <>
-   <section className="messageList">
-    <h2 className="messageList__header">Messages</h2>
-     <ul className="messageList__list">
-      {
-       filteredReceived.map(message => <Message key={message.id} message={message} />)
-      }
-     </ul>
+  <main className="mainMessage">
+  <section className="forMessageBoard">
+    <h2 className="messageList__header">Message Board</h2>
+    <textarea 
+      name="message" 
+      id="message" 
+      cols="30" 
+      rows="10" 
+      className="form-control" 
+      placeholder="Message"
+       value={allMessagesExceptPrivate}
+      autoFocus>
+      </textarea>
    </section>
-
+  <section className="forMessages">
     <section className="messageList">
-    <h2 className="messageList__send">Send</h2>
+      <h2 className="messageList__header">Messages</h2>
+      <ul className="messageList__list">
+        {
+        filteredReceived.map(message => <Message key={message.id} message={message} />)
+        }
+      </ul>
+    </section>
 
-    <MessageForm />
+      <section className="messageList">
+      <h2 className="messageList__send">Send</h2>
 
-     <ul className="messageList__list">
-      {
-       filteredSent.map(message => <Message key={message.id} message={message} />)
-      }
-     </ul>
-   </section>
-  </>
+      <MessageForm />
+
+      <ul className="messageList__list">
+        {
+        filteredSent.map(message => <Message key={message.id} message={message} />)
+        }
+      </ul>
+    </section>
+
+  </section>
+  </main>
  ) // return
 } // MessageList
