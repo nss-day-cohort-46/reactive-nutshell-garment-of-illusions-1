@@ -13,12 +13,6 @@
     border: 1px solid black;
 }
 
-.friends__btn {
-  background: #343a40;
-  color: #007bff;
-  padding: 5px
-}
-
 .friends__searchBtn {
   margin: 10px;
   border-radius: 5px;

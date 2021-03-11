@@ -1,19 +1,11 @@
-.events {
+.event__info {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
-.event {
-  background: rgba(150, 150, 150, 0.8);
-  padding: 0.5em;
-  width: 30%;
-
+.event__buttons {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  margin: 10px 10px;
-  border-bottom: 5px dashed black;
+  justify-content: space-evenly;
 }
 
 .btn--addEvent {
@@ -24,15 +16,6 @@
 .event__btn {
   background: #343a40;
   color: #007bff;
-}
-
-.btn--addEvent {
-  border-radius: 5px;
-}
-
-.event__saveBtn {
-  margin: 10px;
-  padding: 5px;
 }
 
 .events__title,

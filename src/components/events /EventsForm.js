@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { EventsContext } from "./EventsProvider"
+import Button from "react-bootstrap/Button"
 
 export const EventsForm = () => {
   const {saveEvent, getEvents, getEventById, updateEvent} = useContext(EventsContext)
@@ -71,12 +72,12 @@ export const EventsForm = () => {
           <input type="date" id="date" onChange={handleInputChange} required className="form-control" placeholder="Event Date..." value={newEvent.date} />
         </div>
       </fieldset>
-      <button className="event__btn event__saveBtn btn-primary"
+      <Button variant="primary" className="event__btn event__saveBtn"
           onClick={event => {
             event.preventDefault()
             handleSaveEvent()
           }}>
-        {eventId ? "Edit Event" : "Save Event"}</button>
+        {eventId ? "Edit Event" : "Save Event"}</Button>
     </form>
     </>
   )

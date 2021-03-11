@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react"
 import { useHistory } from "react-router-dom"
 import { WeatherContext } from "../weather/WeatherProvider"
+import { Accordion, Card } from "react-bootstrap"
+import Button from "react-bootstrap/Button"
 
 export const EventsCard = (props) => {
   const history = useHistory()
@@ -16,7 +18,7 @@ export const EventsCard = (props) => {
 
   const showEditButton = (eventObj) => {
     if (eventObj.userId === userId && eventObj.creator === true){
-      return <button className="event__editButton event__btn" onClick={() => {history.push(`/events/edit/${eventObj.id}`)}}>Edit Event</button>
+      return <Button variant="secondary" className="event__editButton event__btn" onClick={() => {history.push(`/events/edit/${eventObj.id}`)}}>Edit Event</Button>
     }
   }
 
@@ -57,7 +59,36 @@ export const EventsCard = (props) => {
 
   return (
     <>
-    <div className="event" style={props.event.userId === userId ? {} : {background: "cornsilk"}}>
+    <Card>
+      <Accordion.Toggle as={Card.Header} eventKey={props.event.id} style={(props.event.userId === userId ? {} : {background: "cornsilk"})}>
+        <div className="event__info">
+          <div className="event__name">{props.event.userId === userId ? `Event Name: ${props.event.name}` : <i>Event Name: {props.event.name}</i>}</div>
+          <div className="event__location">{props.event.userId === userId ? `Location: ${props.event.location}` : <i>Location: {props.event.location}</i>}</div>
+          <div className="event__date">{props.event.userId === userId ? `Date: ${props.event.date}` : <i>Date: {props.event.date}</i>}</div>
+        </div>
+      </Accordion.Toggle>
+      <Accordion.Collapse eventKey={props.event.id}>
+        <Card.Body>
+          <div className="event__buttons">
+          {
+            showEditButton(props.event)
+          }
+          <Button variant="info" className="weatherButton" onClick={getWeather} value={props.event.date}>Show Weather</Button>
+          </div>
+          {
+          weather.description ? <div className="weather">
+              <h2>{gotWeather ? props.event.date : "Todays Weather"}</h2>
+              <div className="weather_description">{weather.description}</div>
+              <div className="weather_temp">{weather.temp} degrees</div>
+              <div className="weather_humidity">humidity: {weather.humidity}</div>
+              <div className="weather_wind">wind speed: {weather.wind} mph</div>
+            </div>
+            : <></>
+          }
+        </Card.Body>
+      </Accordion.Collapse>
+    </Card>
+    {/* <div className="event" style={props.event.userId === userId ? {} : {background: "cornsilk"}}>
       <div className="event__name">{props.event.userId === userId ? `Event Name: ${props.event.name}` : <i>Event Name: {props.event.name}</i>}</div>
       <div className="event__location">{props.event.userId === userId ? `Location: ${props.event.location}` : <i>Location: {props.event.location}</i>}</div>
       <div className="event__date">{props.event.userId === userId ? `Date: ${props.event.date}` : <i>Date: {props.event.date}</i>}</div>
@@ -73,7 +104,7 @@ export const EventsCard = (props) => {
                     <div className="weather_humidity">humidity: {weather.humidity}</div>
                     <div className="weather_wind">wind speed: {weather.wind} mph</div>
                 </div>
-                : <></>}
+                : <></>} */}
     </>
   )
 }
