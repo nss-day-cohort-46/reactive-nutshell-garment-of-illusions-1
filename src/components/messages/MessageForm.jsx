@@ -21,13 +21,14 @@ const dateOptions = {
 export const MessageForm = () => {
 
   const { users, getUsers } = useContext(UsersContext)
-  const { getMessages, sendMessage, getMessageById } = useContext(MessageContext)
+  const { getMessages, sendMessage, getMessageById, updateMessage } = useContext(MessageContext)
 
   const [canViewMessageField, setCanViewMessageField] = useState(false)
   const [canSendMesssage, setCanSendMesssage] = useState(false)
   const [isPrivateMessage, setIsPrivateMessage] = useState(false)
   const [filteredUsers, setFilteredUsers] = useState([])
   const [message, setMessage] = useState({})
+  const [idForNewMessage, setIdForNewMessage] = useState(0)
   const [formField, setFormField] = useState({
     searchInput: "",
     message: ""
@@ -65,13 +66,27 @@ export const MessageForm = () => {
     }
 
     setMessage(newMessage)
-    sendMessage(newMessage).then(() => {
-      setFormField({
-        searchInput: "",
-        message: ""
-      })
-      window.alert("Message Sent")
-    }).then(history.push("/messages"))
+
+    if(messageId) {
+      newMessage.id = idForNewMessage
+      updateMessage(newMessage).then(getMessages).then(() => {
+        setFormField({
+          searchInput: "",
+          message: ""
+        })
+        window.alert("Message Sent")
+      }).then(history.push("/messages"))
+
+    } else {
+      sendMessage(newMessage).then(() => {
+        setFormField({
+          searchInput: "",
+          message: ""
+        })
+        window.alert("Message Sent")
+      }).then(history.push("/messages"))
+    }
+      
 
   } // handleSendMessage
 
@@ -113,6 +128,7 @@ export const MessageForm = () => {
           /*
             If recipient no longer exisits.
           */
+         setIdForNewMessage(msg.id)
           let user = users.find(user => user.id === msg.curentUserId)
           if(user === undefined) {
             user = {

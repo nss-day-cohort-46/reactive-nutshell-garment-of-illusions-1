@@ -20,7 +20,7 @@ export const MessageList = () => {
 
  useEffect(() => {
   getMessages().then(getUsers)
- }, []) // useEffect
+ }, [messages]) // useEffect
 
 
  const filteredReceived = messages.filter(message => message.curentUserId === currentUserId)
@@ -28,7 +28,12 @@ export const MessageList = () => {
  filteredSent.forEach(message => message.canEdit = true)
  filteredSent.forEach(message => {
    let user = users.find(user => user.id == message.curentUserId)
+   if(user){
+
    message.recipient = user.name
+   } else {
+     message.recipient = "User not found"
+   }
  })
 
 
