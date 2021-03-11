@@ -16,16 +16,20 @@ import { EventsForm } from "./events /EventsForm"
 import { UserEventsProvider } from "./events /UserEventsProvider"
 import { MessageProvider } from "./messages/MessageProvider"
 import { MessageList } from "./messages/MessageList"
+import { WeatherProvider } from "./weather/WeatherProvider"
+import { WeatherList } from "./weather/WeatherList"
 
 
 export const ApplicationViews = () => {
   return (
     <>
+    <WeatherProvider>
       <FriendsProvider>
       <ArticleProvider>
         <Route exact path="/">
           {/* Render the component for news articles */}
           <ArticleList />
+          <WeatherList />
         </Route>
         <Route exact path="/create">
           {/* Render the component for news articles */}
@@ -37,6 +41,8 @@ export const ApplicationViews = () => {
         </Route>
       </ArticleProvider>
       </FriendsProvider>
+    </WeatherProvider>
+      
 
       <FriendsProvider>
       <UsersProvider>

@@ -9,6 +9,7 @@ import { ArticleContext } from "./ArticleProvider"
 import "./ArticleList.css"
 import { Link } from "react-router-dom"
 import { FriendsContext } from "../friends/FriendsProvider"
+import { WeatherContext } from "../weather/WeatherProvider"
 
 
 export const ArticleList = () => {

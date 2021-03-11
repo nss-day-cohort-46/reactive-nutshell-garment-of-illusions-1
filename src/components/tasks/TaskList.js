@@ -15,7 +15,7 @@ export const TaskList = () => {
         <>
             <div className="tasks">
                 {tasks?.map(task => !task.completed ? <Task key={task.id}
-                                            task={task}/> : <></>)}
+                                            task={task}/> : <div key={task.id}></div>)}
             <button onClick={()=> history.push("/tasks/create")}>Add Task</button>
             </div>
         </>
