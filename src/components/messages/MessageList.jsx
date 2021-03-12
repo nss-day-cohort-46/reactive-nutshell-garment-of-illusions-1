@@ -13,16 +13,16 @@ import { MessageForm } from "./MessageForm"
 
 
 export const MessageList = () => {
-
  const { messages, getMessages } = useContext(MessageContext)
  const { users, getUsers } = useContext(UsersContext)
  const currentUserId = parseInt(sessionStorage.getItem("nutshell_user"))
 
  useEffect(() => {
   getMessages().then(getUsers)
- }, [messages]) // useEffect
-
-
+ }, [])
+ window.onstorage = (e) => {
+   getMessages()
+ }
  const filteredReceived = messages.filter(message => message.curentUserId === currentUserId)
  const filteredSent = messages.filter(message => message.userId === currentUserId)
  filteredSent.forEach(message => message.canEdit = true)
