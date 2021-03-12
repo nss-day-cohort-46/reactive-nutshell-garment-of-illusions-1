@@ -2,7 +2,7 @@
  @author - cheo
  @return MessageContext.Provider with methods to manipulate messages data.
 */
-import React, { createContext, useState } from "react" 
+import React, { createContext, useEffect, useState } from "react" 
 
 export const MessageContext = createContext()
 
@@ -22,13 +22,15 @@ export const MessageProvider = ( props ) => {
    if ( Date.parse(nextDate.timestamp) > Date.parse(currDate.timestamp) ) { return 1; }
    return 0;
  } // _byDate
- 
 
  const getMessages = () => {
   return fetch("http://localhost:8088/messages?_expand=user")
    .then(res => res.json())
    .then(data => data.sort(_byDate))
    .then(setMessages)
+   .then(() => {
+     localStorage.setItem("messageChange", true)
+    console.log("get messages")})
  } // getMessages
 
 

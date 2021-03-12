@@ -86,6 +86,7 @@ export const MessageForm = () => {
         window.alert("Message Sent")
       }).then(history.push("/messages"))
     }
+    localStorage.setItem("messageChange", false)
       
 
   } // handleSendMessage
