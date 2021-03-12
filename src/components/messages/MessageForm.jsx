@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react"
 import { UsersContext } from "../users/UsersProvider"
 import { MessageContext } from "./MessageProvider"
 import "./MessageForm.css"
+import { useHistory, useParams } from "react-router"
 
 
 const dateOptions = {
@@ -20,17 +21,21 @@ const dateOptions = {
 export const MessageForm = () => {
 
   const { users, getUsers } = useContext(UsersContext)
-  const { getMessages, sendMessage } = useContext(MessageContext)
+  const { getMessages, sendMessage, getMessageById, updateMessage } = useContext(MessageContext)
 
   const [canViewMessageField, setCanViewMessageField] = useState(false)
   const [canSendMesssage, setCanSendMesssage] = useState(false)
   const [isPrivateMessage, setIsPrivateMessage] = useState(false)
   const [filteredUsers, setFilteredUsers] = useState([])
   const [message, setMessage] = useState({})
+  const [idForNewMessage, setIdForNewMessage] = useState(0)
   const [formField, setFormField] = useState({
     searchInput: "",
     message: ""
   })
+
+  const { messageId } = useParams()
+  const history = useHistory()
 
 
   const handleControlledInputChange = ( event ) =>  {
@@ -61,13 +66,27 @@ export const MessageForm = () => {
     }
 
     setMessage(newMessage)
-    sendMessage(newMessage).then(() => {
-      setFormField({
-        searchInput: "",
-        message: ""
-      })
-      window.alert("Message Sent")
-    })
+
+    if(messageId) {
+      newMessage.id = idForNewMessage
+      updateMessage(newMessage).then(getMessages).then(() => {
+        setFormField({
+          searchInput: "",
+          message: ""
+        })
+        window.alert("Message Sent")
+      }).then(history.push("/messages"))
+
+    } else {
+      sendMessage(newMessage).then(() => {
+        setFormField({
+          searchInput: "",
+          message: ""
+        })
+        window.alert("Message Sent")
+      }).then(history.push("/messages"))
+    }
+      
 
   } // handleSendMessage
 
@@ -99,6 +118,31 @@ export const MessageForm = () => {
 
   useEffect(() => {
     getUsers()
+    
+    if(messageId) {
+
+      setCanViewMessageField(true)
+      setCanSendMesssage(true)
+      getMessageById(messageId)
+        .then(msg => {
+          /*
+            If recipient no longer exisits.
+          */
+         setIdForNewMessage(msg.id)
+          let user = users.find(user => user.id === msg.curentUserId)
+          if(user === undefined) {
+            user = {
+              name: "Recipient Not Available"
+            }
+          }
+          const newFormField = {
+            searchInput: user.name,
+            message: msg.text
+          }
+          setFormField(newFormField)
+
+        })
+    } // if
   }, []) // useEffect
 
 
@@ -118,9 +162,11 @@ export const MessageForm = () => {
 
     if(formField.searchInput && formField.message) {
       setCanSendMesssage(true)
+      setCanViewMessageField(true)
     } else {
       setCanSendMesssage(false)
     }
+
 
   }, [formField]) // useEffect
 

@@ -33,10 +33,6 @@ export const MessageProvider = ( props ) => {
 
 
  const sendMessage = ( message ) => {
-    // add to db
-    console.log("\n in send message, message ready to POST")
-    console.log(message)
-    console.table(message)
     return fetch(`http://localhost:8088/messages`, {
      method: "POST",
      headers: {
@@ -45,14 +41,34 @@ export const MessageProvider = ( props ) => {
      body: JSON.stringify(message)
    })
     .then(getMessages)
-
  } // sendMessage
- 
+
+
+ const getMessageById = ( id ) => {
+  return fetch(`http://localhost:8088/messages/${id}`)
+   .then(res => res.json())
+  //  .then(setMessages)
+ } //getMessageById
+
+
+ const updateMessage = ( message ) => {
+    return fetch(`http://localhost:8088/messages/${message.id}`, {
+     method: "PUT",
+     headers: {
+       "Content-Type": "application/json"
+     },
+     body: JSON.stringify(message)
+   })
+    .then(getMessages)
+ } // sendMessage
+
  return (
   <MessageContext.Provider value={{
    messages,
    getMessages,
-   sendMessage
+   sendMessage,
+   getMessageById,
+   updateMessage
   }}>
    { props.children }
   </MessageContext.Provider>
