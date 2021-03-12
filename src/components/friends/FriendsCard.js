@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import { UsersContext } from "../users/UsersProvider"
 import { FriendsContext } from "./FriendsProvider"
+import Button from "react-bootstrap/Button"
+import { Accordion, Card } from "react-bootstrap"
 
 export const FriendsCard = (props) => {
   const {searchTerms, setSearchTerms} = useContext(UsersContext)
@@ -38,15 +40,24 @@ export const FriendsCard = (props) => {
     return (
       <div className="friend">
         <div className="friend__name">{props.friend.name}</div>
-        <button className="friend__addFriend friends__btn" id={`btn--${props.friend.id}`} onClick={handleAddFriend} >Add Friend</button>
+        <Button variant="success" className="friend__addFriend friends__btn" id={`btn--${props.friend.id}`} onClick={handleAddFriend} >Add Friend</Button>
       </div>
     )
   }else {
     return (
-      <div className="friend">
-        <div className="friend__name">{props.friend.name}</div>
-        <button className="friend__removeFriend friends__btn" id={`btn--${props.friend.id}`} onClick={handleRemoveFriend} >Remove Friend</button>
-      </div>
+      <Card>
+        <Accordion.Toggle as={Card.Header} eventKey={props.friend.id}>
+          <div className="friend__name">{props.friend.name}</div>
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey={props.friend.id}>
+          <Card.Body><Button variant="danger" className="friend__removeFriend friends__btn" id={`btn--${props.friend.id}`} onClick={handleRemoveFriend} >Remove Friend</Button></Card.Body>
+        </Accordion.Collapse>
+      </Card>
+
+      // <div className="friend">
+      //   <div className="friend__name">{props.friend.name}</div>
+      //   <Button variant="danger" className="friend__removeFriend friends__btn" id={`btn--${props.friend.id}`} onClick={handleRemoveFriend} >Remove Friend</Button>
+      // </div>
     )
   }
 }

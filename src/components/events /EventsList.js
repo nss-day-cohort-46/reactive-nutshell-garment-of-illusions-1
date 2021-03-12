@@ -5,6 +5,8 @@ import { EventsContext } from "./EventsProvider"
 import "./Events.css"
 import { FriendsContext } from "../friends/FriendsProvider"
 import { UserEventsContext } from "./UserEventsProvider"
+import Button from "react-bootstrap/Button"
+import Accordion from "react-bootstrap/Accordion"
 
 export const EventsList = () => {
   const {events, getEvents} = useContext(EventsContext)
@@ -30,21 +32,22 @@ export const EventsList = () => {
     matchingEvent.creator = ue.creator
     return matchingEvent
   })
-  filteredEvents.sort((a,b)=> new Date(a.date) - new Date(b.date))
+  filteredEvents.sort((a,b)=> new Date(b.date) - new Date(a.date))
   if (filteredEvents.includes(undefined) === false){
     return (
       <>
       <h2 className="events__title">Events</h2>
       <Link to="/events/create">
-      <button className="btn--addEvent event__btn">Add Event</button>
+      <Button variant="primary" className="btn--addEvent event__btn">Add Event</Button>
       </Link>
       <div className="events">
-        
+        <Accordion defaultActiveKey="0">
         {
           filteredEvents.map(event => {
             return <EventsCard key={event.id} event={event} />
           })
         }
+        </Accordion>
       </div>
       </>
     )
